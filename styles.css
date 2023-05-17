@@ -9,10 +9,56 @@ body {
   color: #eaeaea;
 
   font-family: "Roboto", sans-serif;
+
+  display: grid;
+  grid-template-areas: "profile timeline";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100vh; /* define a alatura da view port linha*/
+}
+
+aside {
+  grid-area: profile;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-right: 1px solid;
+  border-image: linear-gradient(#727275, #2c2c31) 1; /*faz a borda ficar começar com uma cor e terminar em outra ( gradiente ) com uma opacidade de 1*/
+  gap: 20px;
+
+  background-image: url(./assets/background.svg);
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+aside img:nth-child(2) {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+
+  border: 4px solid transparent;
+  background: linear-gradient(#d39e33, #ed5636, #633bbc) padding-box,
+    linear-gradient(260deg, #d39e33, #ed5636, #633bbc) border-box;
+}
+
+aside p {
+  font-size: 32px;
+  text-align: center;
+}
+
+aside span {
+  font-size: 12px;
+  color: #9e9ea0;
 }
 
 nav {
   padding: 64px;
+  grid-area: timeline;
+
+  overflow-y: scroll; /* essa propriedade corta o conteúdo que excedeu o limite e adiciona um barra de rolagem para que o usuário consiga ver o conteúdo excedido no eixo y*/
 }
 
 .memory {
