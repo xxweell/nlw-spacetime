@@ -4,6 +4,34 @@
   box-sizing: border-box;
 }
 
+:root {
+  font-size: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar {
+  background-color: #2c2c31;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9e9ea0;
+}
+
+@keyframes entering {
+  /*entering é nome que dei a animação*/
+  from {
+    opacity: 0;
+    transform: translateY(-200px); /*pra jogar pra fora da tela*/
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /*pra voltar pra posição inicial na tela*/
+  }
+}
+
 body {
   background-color: #121215;
   color: #eaeaea;
@@ -34,6 +62,11 @@ aside {
   background-size: auto 100%;
 }
 
+aside * {
+  /*seleciona todos os elementos dentro do aside pra aplicar a transição*/
+  animation: entering 0.7s ease-in-out;
+}
+
 aside img:nth-child(2) {
   width: 160px;
   height: 160px;
@@ -45,12 +78,12 @@ aside img:nth-child(2) {
 }
 
 aside p {
-  font-size: 32px;
+  font-size: 2rem;
   text-align: center;
 }
 
 aside span {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #9e9ea0;
 }
 
@@ -59,6 +92,7 @@ nav {
   grid-area: timeline;
 
   overflow-y: scroll; /* essa propriedade corta o conteúdo que excedeu o limite e adiciona um barra de rolagem para que o usuário consiga ver o conteúdo excedido no eixo y*/
+  animation: entering 0.7s ease-in-out;
 }
 
 .memory {
@@ -72,11 +106,11 @@ nav {
 
 .memory small {
   color: #bebebf;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .memory h1 {
-  font-size: 32px;
+  font-size: 2rem;
   color: #eaeaea;
 }
 
@@ -85,10 +119,48 @@ nav {
   height: 280px;
   object-fit: cover; /*propriedade pra manter a proporção da imagem como uma capa*/
   border-radius: 8px;
+
+  transition: transform 0.3s ease-in-out; /*a transição sempre é aplicada no elemento que será modificado, no caso a imagem*/
+}
+
+.memory img:hover {
+  transform: scale(1.1);
+}
+
+.memory div {
+  width: 100%;
+  height: 280px;
+  overflow: hidden; /*se o conteúdo não couber nas alturas e larguras definidas, esconde o restante*/
+  border-radius: 8px;
 }
 
 .memory p {
-  font-size: 18px;
+  font-size: 1.2rem;
   color: #bebebf;
   line-height: 28px;
+}
+
+@media (max-width: 768px) {
+  /*quando o site estiver em uma tela com máximo de tamanho de 0 até 768px, as configurações abaixo são aplicadas*/
+  :root {
+    font-size: 12px;
+  }
+
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-areas:
+      "profile"
+      "timeline";
+  }
+
+  aside {
+    border-right: none;
+    padding: 32px 12px;
+  }
+
+  nav {
+    overflow-y: visible;
+    padding: 22px;
+  }
 }
